@@ -26,6 +26,7 @@ namespace Unity.MLAgents.Editor
                 EditorGUILayout.PropertyField(so.FindProperty("m_Grayscale"), true);
                 EditorGUILayout.PropertyField(so.FindProperty("m_ObservationStacks"), true);
                 EditorGUILayout.PropertyField(so.FindProperty("m_ObservationType"), true);
+                EditorGUILayout.PropertyField(so.FindProperty("m_TextureFormat"), true);
             }
             EditorGUI.EndDisabledGroup();
             EditorGUILayout.PropertyField(so.FindProperty("m_RuntimeCameraEnable"), true);

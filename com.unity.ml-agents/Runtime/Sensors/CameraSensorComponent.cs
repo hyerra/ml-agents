@@ -89,6 +89,20 @@ namespace Unity.MLAgents.Sensors
         }
 
         [HideInInspector, SerializeField]
+        TextureFormat m_TextureFormat = TextureFormat.RGB24;
+
+
+        /// <summary>
+        /// Texture format of the generated observation.
+        /// Note that changing this after the sensor is created has no effect.
+        /// </summary>
+        public TextureFormat TextureFormat
+        {
+            get { return m_TextureFormat; }
+            set { m_TextureFormat = value; }
+        }
+
+        [HideInInspector, SerializeField]
         bool m_RuntimeCameraEnable;
 
 
@@ -142,7 +156,7 @@ namespace Unity.MLAgents.Sensors
         public override ISensor[] CreateSensors()
         {
             Dispose();
-            m_Sensor = new CameraSensor(m_Camera, m_Width, m_Height, Grayscale, m_SensorName, m_Compression, m_ObservationType);
+            m_Sensor = new CameraSensor(m_Camera, m_Width, m_Height, Grayscale, m_SensorName, m_Compression, m_ObservationType, m_TextureFormat);
 
             if (ObservationStacks != 1)
             {

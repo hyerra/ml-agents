@@ -17,6 +17,7 @@ namespace Unity.MLAgents.Sensors
         private ObservationSpec m_ObservationSpec;
         SensorCompressionType m_CompressionType;
         Texture2D m_Texture;
+        TextureFormat m_TextureFormat;
 
         /// <summary>
         /// The Camera used for rendering the sensor observations.
@@ -47,7 +48,7 @@ namespace Unity.MLAgents.Sensors
         /// <param name="compression">The compression to apply to the generated image.</param>
         /// <param name="observationType">The type of observation.</param>
         public CameraSensor(
-            Camera camera, int width, int height, bool grayscale, string name, SensorCompressionType compression, ObservationType observationType = ObservationType.Default)
+            Camera camera, int width, int height, bool grayscale, string name, SensorCompressionType compression, ObservationType observationType = ObservationType.Default, TextureFormat textureFormat = TextureFormat.RGB24)
         {
             m_Camera = camera;
             m_Width = width;
@@ -57,7 +58,7 @@ namespace Unity.MLAgents.Sensors
             var channels = grayscale ? 1 : 3;
             m_ObservationSpec = ObservationSpec.Visual(height, width, channels, observationType);
             m_CompressionType = compression;
-            m_Texture = new Texture2D(width, height, TextureFormat.RGB24, false);
+            m_Texture = new Texture2D(width, height, TextureFormat.RGB48, false);
         }
 
         /// <summary>
@@ -67,6 +68,15 @@ namespace Unity.MLAgents.Sensors
         public string GetName()
         {
             return m_Name;
+        }
+
+        /// <summary>
+        /// Accessor for the texture format of the sensor.
+        /// </summary>
+        /// <returns>Texture format.</returns>
+        public TextureFormat GetTextureFormat()
+        {
+            return m_TextureFormat;
         }
 
         /// <summary>
